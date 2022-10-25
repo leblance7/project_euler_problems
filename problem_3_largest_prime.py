@@ -1,4 +1,3 @@
-#function takes a number and returns true or false determining if prime
 def is_factor(n: int, x: int) -> bool:
     return n % x == 0
 
@@ -17,17 +16,19 @@ def is_prime(n: int) -> bool:
     else:
         return False
 
+#Takes a list of factors and determines the prime factors
+
+def prime_factors(n: int) -> list:
+    facts = factors(n)
+    prime_factors =[]
+    for x in facts:
+        if is_prime(x) == True:
+            prime_factors.append(x)
+    return prime_factors
         
 def print_factors(n: int) -> None:
-    print(n, "->", factors(n))
+    print(n, "->", prime_factors(n))
 
 
+print_factors(13195)
 
-print(is_prime(13))
-
-
-
-
-
-    
-    
