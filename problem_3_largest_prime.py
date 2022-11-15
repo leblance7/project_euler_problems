@@ -13,13 +13,12 @@ class IntRef:
 
 WORK = IntRef(0)
 
+cache_factors = {}
+
 def is_factor(n: int, x:int) -> bool:
     result = n % x == 0
     print(f"is_factor({n}, {x}) -> {result}")
     return result
-    #return n % x == 0
-
-
 
 def factors(n: int) -> list[int]:
     #print(f"factors({n}) ...")
@@ -38,20 +37,36 @@ def factors(n: int) -> list[int]:
     return results
 
 
+def has_factors(n: int) -> list[int]:
+    #print(f"factors({n}) ...")
+    if n == 2:
+        return []
+    if n % 2 == 0:
+        cache_factor[n] = x
+    for x in range(3, n//2+1, 2):
+        #increment work to measure loop efficenty
+        WORK.iadd(1)
+        #print(f" ... factors({n}) for x={x}") 
+        if is_factor(n ,x):
+            cache_factors[n] = x
+            return cache_factors
+        
+
+        
 def is_prime(n: int) -> bool:
     #print(f"is_prime({n})...")
     res = factors(n)
     if res == []:
-        print(f"is_prime({n}) -> True")
+        #print(f"is_prime({n}) -> True")
         return True
     else:
-        print(f"is_prime({n}) -> False")
+        #print(f"is_prime({n}) -> False")
         return False
 
 #Takes a list of factors and determines the prime factors
 
 def prime_factors(n: int) -> list:
-    print(f"prime_factors({n})...")
+    #print(f"prime_factors({n})...")
     facts = factors(n)
     prime_facts =[]
     for x in facts:
